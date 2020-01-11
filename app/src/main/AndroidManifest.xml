@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.iyuba.american">
+
+    <!-- normal permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name_push"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.iyuba.pushlib.PushMessageService"
+            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
+            <intent-filter>
+                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.iyuba.pushlib.CustomPushReceiver">
+            <intent-filter>
+                <action android:name="com.xuexiang.xpush.core.action.RECEIVE_CONNECT_STATUS_CHANGED" />
+                <action android:name="com.xuexiang.xpush.core.action.RECEIVE_NOTIFICATION" />
+                <action android:name="com.xuexiang.xpush.core.action.RECEIVE_NOTIFICATION_CLICK" />
+                <action android:name="com.xuexiang.xpush.core.action.RECEIVE_MESSAGE" />
+                <action android:name="com.xuexiang.xpush.core.action.RECEIVE_COMMAND_RESULT" />
+
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.iyuba.pushlib.HuaweiReceiver"
+            android:permission="com.huawei.hmsagentsamplexsj.permission.PROCESS_PUSH_MSG">
+            <intent-filter>
+
+                <!-- 必须,用于接收token -->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须, 用于接收透传消息 -->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 必须, 用于接收通知栏消息点击事件 此事件不需要开发者处理，只需注册就可以 -->
+                <action android:name="com.huawei.intent.action.PUSH_DELAY_NOTIFY" />
+            </intent-filter>
+        </receiver>
+
+
+
+        <!-- 如果引入了xpush-jpush库 -->
+        <!--
+            <meta-data
+            android:name="XPush_JPush_1000"
+            android:value="com.xuexiang.xpush.jpush.JPushClient" />
+        -->
+        <!-- 如果引入了xpush-xiaomi库 -->
+        <meta-data
+            android:name="XPush_MIPush_1003"
+            android:value="com.xuexiang.xpush.xiaomi.XiaoMiPushClient" />
+        <!-- 如果引入了xpush-huawei库 -->
+        <meta-data
+            android:name="XPush_HuaweiPush_1002"
+            android:value="com.xuexiang.xpush.huawei.HuaweiPushClient" />
+
+        <!-- 小米推送静态注册，下面的“\ ”必须加上，否则将无法正确读取 -->
+        <meta-data
+            android:name="MIPUSH_APPID"
+            android:value="\ 2882303761517251113" />
+        <meta-data
+            android:name="MIPUSH_APPKEY"
+            android:value="\ 5811725177113" />
+        <!-- 华为HMS推送静态注册 -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="10181585" /> <!-- 100697977 -->
+
+
+        <!-- 极光推送静态注册 -->
+        <!--
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="default_developer" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="891b62b7fc226e678673d1b4" />
+        -->
+
+
+        <!-- vivo推送开始 -->
+        <!-- vivo推送配置项 -->
+        <!--
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="d43bda6b-3330-4707-a82c-5131d8437092" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="15425" />
+        -->
+        <!-- c907aa0a-de0d-4ddb-a915-c0a4eb3d1378 -->
+
+
+        <!-- 推送服务需要配置的 service、activity -->
+        <!--
+        <service
+            android:name="com.vivo.push.sdk.service.CommandClientService"
+            android:exported="true" />
+
+        <activity
+            android:name="com.vivo.push.sdk.LinkProxyClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <receiver android:name=".push.IVivoPushMessageReceiver">
+            <intent-filter>
+                &lt;!&ndash; 接收push消息 &ndash;&gt;
+                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        -->
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/network_security_config" />
+        <!-- android:taskAffinity="com.iyuba.american.TestActivity"-->
+        <activity
+            android:name=".TestActivity"
+
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="iyuba.chat.message" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

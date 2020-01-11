@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Push World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_check_opush_support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="检查OPUSH"/>
+
+    <Button
+        android:id="@+id/btn_get_push_service_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="推送服务状态"/>
+
+    <Button
+        android:id="@+id/btn_get_regid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取注册ID"/>
+    <Button
+        android:id="@+id/btn_get_package"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="包名"/>
+
+    <Button
+        android:id="@+id/btn_mi_regid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="华为/小米参数"/>
+
+    <Button
+        android:id="@+id/btn_vivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ViVo_start"/>
+
+    <EditText
+        android:id="@+id/tv_reg_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        tools:text="这是一个KEY，这是一个KEY，这是一个KEY，这是一个KEY"/>
+    <TextView
+        android:id="@+id/tv_push_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="推送后台注册情况："/>
+
+    <TextView
+        android:id="@+id/tv_system"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机操作系统是："/>
+</LinearLayout>
